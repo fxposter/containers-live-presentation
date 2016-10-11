@@ -176,8 +176,10 @@ import "os/signal"
 go func() {
   c := make(chan os.Signal, 1)
   signal.Notify(c, syscall.SIGTERM)
-  s := <-c
-  fmt.Println("Got signal:", s)
+  for {
+    s := <-c
+    fmt.Println("Got signal:", s)
+  }
 }()
 ```
 
